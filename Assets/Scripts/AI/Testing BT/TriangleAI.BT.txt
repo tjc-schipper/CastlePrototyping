@@ -1,0 +1,26 @@
+tree("Root")
+	sequence
+		tree("SetDestination")
+		tree("GoTo")
+
+
+
+
+tree("SetDestination")
+	fallback
+		sequence
+			HasMark
+			StillInRangeOfMark
+		GetNewMark
+		sequence
+			while IsAtTargetPos
+				GetRandomTargetPos
+		
+
+
+tree("GoTo")
+	fallback
+		sequence
+			HasTargetPos
+			SetMoving
+		StopMoving

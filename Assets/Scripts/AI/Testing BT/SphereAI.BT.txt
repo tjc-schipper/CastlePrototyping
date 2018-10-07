@@ -1,0 +1,32 @@
+tree("Root")
+	sequence
+		mute GetNearbyThreats
+		fallback
+			tree("Moving")
+			tree("Avoid")
+			tree("Idle")
+	
+
+tree("Moving")
+	sequence
+		IsSafe
+		fallback
+			sequence
+				HasTargetPos
+				not IsAtTargetPos
+				SetMoving
+			sequence
+				while not HasTargetPos
+					GetTargetPos
+
+
+tree("Avoid")
+	sequence
+		GetClosestThreat
+		GetSafePosition
+		RunToPosition
+
+
+tree("Idle")
+	sequence
+		StopMoving
