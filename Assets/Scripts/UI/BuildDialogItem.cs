@@ -17,13 +17,21 @@ public class BuildDialogItem : MonoBehaviour, UnityEngine.EventSystems.IPointerC
 
     private Buildable buildable;
 
+
     public void Init(Buildable buildable)
     {
         this.buildable = buildable;
-        this.icon.sprite = buildable.BuildMenuIcon;
+        bool canAfford = Root.PlayerResources.CanAfford(buildable.Cost);
+
         this.nameLabel.text = buildable.DisplayName;
+
+        this.icon.sprite = buildable.BuildMenuIcon;
+        this.icon.color = canAfford ? Color.white : Color.grey;
+
+        this.costLabel.color = canAfford ? Color.white : Color.red;
         this.costLabel.text = buildable.Cost.materials.ToString();  //TODO: Swap with a resource visualizer! (stacked vertical)
     }
+
 
     public void OnPointerClick(PointerEventData eventData)
     {
