@@ -5,55 +5,62 @@ using UnityEngine;
 public class Root : MonoBehaviour
 {
 
-    [SerializeField] BuildUI buildUI;
-    [SerializeField] UIFactory uiFactory;
-    [SerializeField] BuildSystem buildSystem;
-    [SerializeField] PlayerResources playerResources;
+	[SerializeField]
+	BuildUI buildUI;
+
+	[SerializeField]
+	UIFactory uiFactory;
+
+	[SerializeField]
+	BuildSystem buildSystem;
+
+	[SerializeField]
+	PlayerResources playerResources;
 
 
-    private static Root instance;
-    private static Root Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectsOfType<Root>()[0];
-            }
-            return instance;
-        }
-    }
+	private static Root instance;
+	private static Root Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				instance = GameObject.FindObjectsOfType<Root>()[0];
+			}
+			return instance;
+		}
+	}
 
 
-    public static BuildUI BuildUI
-    {
-        get
-        {
-            return Instance.buildUI;
-        }
-    }
+	public static BuildUI BuildUI
+	{
+		get
+		{
+			return Instance.buildUI;
+		}
+	}
 
-    public static UIFactory UIFactory
-    {
-        get
-        {
-            return Instance.uiFactory;
-        }
-    }
+	public static UIFactory UIFactory
+	{
+		get
+		{
+			return Instance.uiFactory;
+		}
+	}
 
-    public static BuildSystem BuildSystem
-    {
-        get
-        {
-            return Instance.buildSystem;
-        }
-    }
+	public static BuildSystem BuildSystem
+	{
+		get
+		{
+			return Instance.buildSystem;
+		}
+	}
 
-    public static PlayerResources PlayerResources
-    {
-        get
-        {
-            return Instance.playerResources;
-        }
-    }
+	public static PlayerResources PlayerResources
+	{
+		get
+		{
+			return Instance.playerResources;
+		}
+	}
 }

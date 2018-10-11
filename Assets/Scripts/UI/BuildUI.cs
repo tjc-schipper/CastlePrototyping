@@ -10,6 +10,9 @@ public class BuildUI : MonoBehaviour, IOpenCloseable
     [Zenject.Inject]
     UIFactory uiFactory;
 
+	[Zenject.Inject]
+	BuildDialog.Factory fact_BuildDialog;
+
     private BuildDialog buildDialog;
     private bool isOpen = false;
 
@@ -25,7 +28,11 @@ public class BuildUI : MonoBehaviour, IOpenCloseable
             });
         }
 
-        this.buildDialog = Root.UIFactory.CreateBuildDialog(slot, this.root_BuildDialog);
+		//this.buildDialog = Root.UIFactory.CreateBuildDialog(slot, this.root_BuildDialog);
+		this.buildDialog = this.fact_BuildDialog.Create();
+		this.buildDialog.transform.SetParent(this.root_BuildDialog);
+		this.buildDialog.transform.localPosition = Vector3.zero;
+		this.buildDialog.Init(slot);
         this.isOpen = true;
     }
 
