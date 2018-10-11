@@ -6,28 +6,28 @@ using UnityEngine;
 public class Armor : MonoBehaviour
 {
 
-	[SerializeField]
-	int armorStrength = 2;
+    [SerializeField]
+    int armorStrength = 2;
 
-	DamageModifier mod;
+    DamageModifier mod;
 
-	void Start()
-	{
-		Damageable t = GetComponent<Damageable>();
-		if (t != null)
-		{
-			this.mod = new DamageModReduction(this.armorStrength);
-			t.AddModifier(this.mod);
-		}
-	}
+    void Start()
+    {
+        Damageable t = GetComponent<Damageable>();
+        if (t != null)
+        {
+            this.mod = new DamageModReduction(this.armorStrength);
+            t.AddModifier(this.mod);
+        }
+    }
 
-	void OnDisable()
-	{
-		Damageable t = GetComponent<Damageable>();
-		if (t != null && this.mod != null)
-		{
-			t.RemoveModifier(this.mod);
-			this.mod = null;
-		}
-	}
+    void OnDisable()
+    {
+        Damageable t = GetComponent<Damageable>();
+        if (t != null && this.mod != null)
+        {
+            t.RemoveModifier(this.mod);
+            this.mod = null;
+        }
+    }
 }
