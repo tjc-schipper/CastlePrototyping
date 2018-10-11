@@ -22,7 +22,7 @@ public class BuildDialogItem : MonoBehaviour, UnityEngine.EventSystems.IPointerC
         this.buildable = buildable;
         this.icon.sprite = buildable.BuildMenuIcon;
         this.nameLabel.text = buildable.DisplayName;
-        this.costLabel.text = buildable.Cost.ToString();
+        this.costLabel.text = buildable.Cost.materials.ToString();  //TODO: Swap with a resource visualizer! (stacked vertical)
     }
 
     public void OnPointerClick(PointerEventData eventData)

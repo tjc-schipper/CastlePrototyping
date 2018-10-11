@@ -11,7 +11,7 @@ public class BuildableSlot : MonoBehaviour
     private Clickable clickable;
 
     [Zenject.Inject]
-    private BuildUI buildUI;    // Invert this dependency! buildUI should respond to slots being clicked.
+    private BuildUI buildUI;    // TODO: Invert this dependency! buildUI should respond to slots being clicked.
 
     public enum SlotStates
     {

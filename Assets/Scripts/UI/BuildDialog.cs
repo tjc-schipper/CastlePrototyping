@@ -32,8 +32,11 @@ public class BuildDialog : MonoBehaviour, IOpenCloseable
 
     private void Item_Clicked(Buildable buildable)
     {
-        Root.BuildUI.Close();
-        Root.BuildSystem.Build(buildable, this.slot);
+        if (Root.PlayerResources.Pay(buildable.Cost))
+        {
+            Root.BuildUI.Close();
+            Root.BuildSystem.Build(buildable, this.slot);
+        }
     }
 
 

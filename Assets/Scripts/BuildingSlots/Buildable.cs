@@ -13,10 +13,10 @@ public class Buildable : ScriptableObject
 
     [SerializeField] Sprite buildMenuIcon;
 
-    [SerializeField] int cost;
+    [SerializeField] ResourceAmount cost;
 
 
-    public int Cost
+    public ResourceAmount Cost
     {
         get
         {
