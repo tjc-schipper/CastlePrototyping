@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99346ef066f83224e88b82f9c44f6cf2, type: 3}
-  m_Name: Archer
+  m_Name: Ogre
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1904047623274210, guid: 6c29e028222dfd04a91da8ecbd7a7853, type: 2}
-  cost: 1
-  displayName: Archer
-  icon: {fileID: 21300000, guid: 4eb20d6b51d99cf4cac55ef241319df0, type: 3}
+  prefab: {fileID: 1306168719598074, guid: a917cd38f151ee14189dba35c2ed9775, type: 2}
+  cost: 2
+  displayName: Ogre
+  icon: {fileID: 21300000, guid: 596678c53fd54a640bf95ba7dfafd092, type: 3}

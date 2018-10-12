@@ -34,7 +34,8 @@ public class HealthBarsUI : MonoBehaviour
 	{
 		foreach (KeyValuePair<Damageable, HealthBar> pair in instance.damageables)
 		{
-			pair.Value.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(pair.Key.transform.position) - new Vector3(0f, Y_OFFSET, 0f);
+            pair.Value.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(pair.Key.transform.position) - new Vector3(0f, Y_OFFSET, 0f);
+
 		}
 	}
 

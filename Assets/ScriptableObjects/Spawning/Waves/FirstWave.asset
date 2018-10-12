@@ -15,12 +15,18 @@ MonoBehaviour:
   - lane: 0
     unitsToSpawn:
     - unitType: {fileID: 11400000, guid: 7f6b7a347db60bb42ab964e1c07d8d22, type: 2}
-      count: 1
+      count: 5
+    - unitType: {fileID: 11400000, guid: 551eb026629b74b408c85cdeb3201f6a, type: 2}
+      count: 2
   - lane: 1
     unitsToSpawn:
-    - unitType: {fileID: 0}
-      count: 0
+    - unitType: {fileID: 11400000, guid: 7f6b7a347db60bb42ab964e1c07d8d22, type: 2}
+      count: 4
+    - unitType: {fileID: 11400000, guid: 551eb026629b74b408c85cdeb3201f6a, type: 2}
+      count: 1
   - lane: 2
     unitsToSpawn:
-    - unitType: {fileID: 0}
-      count: 0
+    - unitType: {fileID: 11400000, guid: 7f6b7a347db60bb42ab964e1c07d8d22, type: 2}
+      count: 2
+    - unitType: {fileID: 11400000, guid: 551eb026629b74b408c85cdeb3201f6a, type: 2}
+      count: 5
