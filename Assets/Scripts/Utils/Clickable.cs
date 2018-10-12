@@ -36,8 +36,17 @@ public class Clickable : MonoBehaviour
         this.cr_updateEvents = StartCoroutine(CR_UpdateEvents());
     }
 
+    private bool IsCoveredByUI()
+    {
+        // Prevent clicking if covered by UI element
+        UnityEngine.EventSystems.EventSystem es = UnityEngine.EventSystems.EventSystem.current;
+        return (es != null && es.IsPointerOverGameObject());
+    }
+
     private void OnMouseEnter()
     {
+        if (IsCoveredByUI()) return;
+
         this.over = true;
         if (this.MouseOver != null)
             this.MouseOver.Invoke(this);
@@ -45,6 +54,8 @@ public class Clickable : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (IsCoveredByUI()) return;
+
         this.over = false;
         if (this.MouseOut != null)
             this.MouseOut.Invoke(this);
@@ -52,6 +63,8 @@ public class Clickable : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (IsCoveredByUI()) return;
+
         this.mouseDown = true;
 
         if (this.cr_mouseDown != null)
@@ -63,6 +76,8 @@ public class Clickable : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (IsCoveredByUI()) return;
+
         this.mouseDown = false;
 
         if (this.clickMode != ClickModes.NONE)
