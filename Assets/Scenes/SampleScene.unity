@@ -2479,6 +2479,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &642406129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 642406131}
+  - component: {fileID: 642406130}
+  m_Layer: 0
+  m_Name: UIFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &642406130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 642406129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198f6c3b610eee146aa87efa0c6b0e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &642406131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 642406129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 699219428}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &668105690
 Prefab:
   m_ObjectHideFlags: 0
@@ -2536,6 +2576,7 @@ GameObject:
   - component: {fileID: 699219428}
   - component: {fileID: 699219427}
   - component: {fileID: 699219426}
+  - component: {fileID: 699219429}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -2557,7 +2598,7 @@ MonoBehaviour:
   buildableSet: {fileID: 11400000, guid: d3e8a3d60e90f8749a4eb4ab4b475715, type: 2}
   buildUI: {fileID: 594086578}
   buildSystem: {fileID: 1868000249}
-  uiFactory: {fileID: 11400000, guid: ccfe4dab248ad5a4089d730bc8f6d429, type: 2}
+  uiFactory: {fileID: 642406130}
   playerResources: {fileID: 1868000250}
   prefab_BuildDialog: {fileID: 114737566073360014, guid: 074ed792cb9dbc24fad7fef3351ebb58,
     type: 2}
@@ -2576,6 +2617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _installers:
   - {fileID: 699219426}
+  - {fileID: 699219429}
   _installerPrefabs: []
   _scriptableObjectInstallers: []
   _autoRun: 1
@@ -2591,10 +2633,26 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 642406131}
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &699219429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 699219425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded7876a705839d41b201f1867146cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab_BuildDialog: {fileID: 114737566073360014, guid: 074ed792cb9dbc24fad7fef3351ebb58,
+    type: 2}
+  prefab_BuildDialogItem: {fileID: 114802575817353756, guid: 992f8a57e29be384d9bd0e838d1f1ab5,
+    type: 2}
 --- !u!43 &756409264
 Mesh:
   m_ObjectHideFlags: 0
@@ -3613,7 +3671,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh8806
+  m_Name: pb_Mesh17356
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4707,7 +4765,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1150
+  m_Name: pb_Mesh-1328
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

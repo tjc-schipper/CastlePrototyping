@@ -1,25 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-[CreateAssetMenu(menuName = "ING/Factories/UIFactory")]
-public class UIFactory : ScriptableObject
+public class UIFactory : MonoBehaviour
 {
+    [Inject]
+    private BuildDialog.Factory fact_BuildDialog;
 
-    [SerializeField] BuildDialog prefab_BuildDialog;
-    [SerializeField] BuildDialogItem prefab_BuildDialogItem;
+    [Inject]
+    private BuildDialogItem.Factory fact_BuildDialogItem;
 
     public BuildDialog CreateBuildDialog(BuildableSlot slot, RectTransform parent)
     {
-        BuildDialog newDialog = Instantiate(prefab_BuildDialog, parent);
+        BuildDialog newDialog = this.fact_BuildDialog.Create();
+        newDialog.transform.SetParent(parent);
+        newDialog.transform.localPosition = Vector3.zero;
         newDialog.Init(slot);
         return newDialog;
     }
 
     public BuildDialogItem CreateBuildDialogItem(Buildable buildable, RectTransform parent)
     {
-        BuildDialogItem item = Instantiate(this.prefab_BuildDialogItem, parent);
+        BuildDialogItem item = this.fact_BuildDialogItem.Create();
+        item.transform.SetParent(parent);
+        item.transform.localPosition = Vector3.zero;
         item.Init(buildable);
         return item;
     }
+
 }
