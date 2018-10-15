@@ -6,36 +6,53 @@ using UnityEngine;
 public class BuildDialog : MonoBehaviour, IOpenCloseable
 {
 
-    [SerializeField] private RectTransform frame;
-    [SerializeField] RectTransform itemsFrame;
+    [SerializeField]
+    RectTransform itemsFrame;
 
     public const float ICON_MARGIN = 8f;
 
+    private UIFactory uiFactory;
+
+    private BuildUI buildUI;
+    private BuildSystem buildSystem;
+    private PlayerResources playerResources;
     private BuildableSlot slot;
 
 
+    [Zenject.Inject]
+    public void Construct(UIFactory uiFactory, BuildUI buildUI, BuildSystem buildSystem, PlayerResources playerResources)
+    {
+        this.uiFactory = uiFactory;
+        this.buildUI = buildUI;
+        this.buildSystem = buildSystem;
+        this.playerResources = playerResources;
+    }
 
     public void Init(BuildableSlot slot)
     {
         this.slot = slot;
-        this.frame = this.gameObject.GetComponent<RectTransform>();
         BuildDialogItem item = null;
         for (int i = 0; i < slot.PossibleBuildables.Length; i++)
         {
-            item = Root.UIFactory.CreateBuildDialogItem(slot.PossibleBuildables[i], this.itemsFrame);
-            item.GetComponent<RectTransform>().localPosition =
+            item = this.uiFactory.CreateBuildDialogItem(slot.PossibleBuildables[i], this.itemsFrame);
+
+            item.Clicked += Item_Clicked;
+            item.transform.localPosition =
                 new Vector3(ICON_MARGIN, 0f, 0f) +
                 new Vector3((BuildDialogItem.FRAME_WIDTH + ICON_MARGIN) * i, 0f, 0f);
-            item.Clicked += Item_Clicked;
         }
     }
 
     private void Item_Clicked(Buildable buildable)
     {
-        if (Root.PlayerResources.Pay(buildable.Cost))
+        if (this.playerResources.Pay(buildable.Cost))
+        //if (Root.PlayerResources.Pay(buildable.Cost))
         {
-            Root.BuildUI.Close();
-            Root.BuildSystem.Build(buildable, this.slot);
+            //Root.BuildUI.Close();
+            //Root.BuildSystem.Build(buildable, this.slot);
+            this.buildUI.Close();
+            this.buildSystem.Build(buildable, this.slot);
+
         }
     }
 
@@ -57,4 +74,8 @@ public class BuildDialog : MonoBehaviour, IOpenCloseable
     {
         throw new System.NotImplementedException();
     }
+
+
+
+    public class Factory : Zenject.PlaceholderFactory<BuildDialog> { }
 }

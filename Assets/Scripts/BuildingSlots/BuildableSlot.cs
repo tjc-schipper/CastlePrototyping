@@ -62,8 +62,9 @@ public class BuildableSlot : MonoBehaviour
 
     private void Clickable_Click(Clickable sender)
     {
-        if (this.SlotState == SlotStates.EMPTY)
-            Root.BuildUI.ShowBuildDialog(this);
+		if (this.SlotState == SlotStates.EMPTY)
+			this.buildUI.ShowBuildDialog(this);
+            //Root.BuildUI.ShowBuildDialog(this);
     }
 
     private void Clickable_MouseOver(Clickable sender)

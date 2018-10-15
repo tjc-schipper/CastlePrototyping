@@ -25,7 +25,7 @@ public class BuildUI : MonoBehaviour, IOpenCloseable
             });
         }
 
-        this.buildDialog = Root.UIFactory.CreateBuildDialog(slot, this.root_BuildDialog);
+        this.buildDialog = this.uiFactory.CreateBuildDialog(slot, this.root_BuildDialog);
         this.isOpen = true;
     }
 
