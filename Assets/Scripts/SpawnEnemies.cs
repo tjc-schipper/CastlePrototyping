@@ -2,70 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class SpawnEnemies : MonoBehaviour {
+public class SpawnEnemies : MonoBehaviour
+{
 
-    public Transform[] spawnPoints;
-    public GameObject[] enemies;
-    public int[] nrEnemies;
-    public Dictionary<GameObject, int> occurringEnemies = new Dictionary<GameObject, int>();
-    
-    public GameObject archer;
-    public GameObject ogre;
-    public int nrArchers = 5;
-    public int nrOgres = 3;
-    public SpawnUI spawnUI;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private float spawnInterval = 0.125f;
+    [SerializeField] private SpawnUI spawnUI;
+
+    private Queue<UnitConfig> spawnQueue;
+    private Coroutine cr_DoSpawns;
 
 
-    // Use this for initialization
-    void Start () {
-        //for (int i = 0; i < enemies.Length; i++)
-        //{
-        //    occurringEnemies.Add(enemies[i], nrEnemies[i]);
-        //}
-        // InvokeRepeating("Spawn", 0.0f, 5.0f);
-        if (spawnUI != null)
+    private void Awake()
+    {
+        this.spawnQueue = new Queue<UnitConfig>();
+    }
+
+    void Start()
+    {
+        if (this.spawnUI == null)
         {
-            spawnUI = GetComponentInChildren<SpawnUI>();
-            spawnUI.Create();
+            Debug.LogError("SpawnUI has not been assigned to SpawnEnemies", this.gameObject);
+            return;
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-    
-	}
 
-    public void Spawn(SpawnUnitGroup unitGroup) {
-        SpawnUnit[] availableUnits = unitGroup.unitsToSpawn.Where(unit => unit.count > 0).ToArray();
-//some loop?
-            int unitToSpawn = Random.Range(0, availableUnits.Length);
-            int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+        this.spawnUI.Create();
+    }
 
-            Instantiate(unitGroup.unitsToSpawn[unitToSpawn].unitType.prefab, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-            unitGroup.unitsToSpawn[unitToSpawn].count--;
-        
-        //List<KeyValuePair<GameObject, int>> availableTypes = new List<KeyValuePair<GameObject, int>>();
+    /// <summary>
+    /// Tell this Spawner to spawn a list of units in order of appearance in the unitGroup
+    /// </summary>
+    /// <param name="unitGroup"></param>
+    /// <param name="clearRemaining"></param>
+    public void Spawn(SpawnUnitGroup unitGroup, bool clearRemaining = false)
+    {
+        if (clearRemaining)
+            this.spawnQueue.Clear();
 
-        //foreach (KeyValuePair<GameObject, int> occurringEnemy in occurringEnemies)
-        //{
-        //    if (occurringEnemy.Value > 0)
-        //    {
-        //        availableTypes.Add(occurringEnemy);
-        //    }
-        //}
+        // Add each instance of a spawnable unit to the spawnQueue
+        foreach (SpawnUnit spawnUnit in unitGroup.unitsToSpawn)
+        {
+            for (int i = 0; i < spawnUnit.count; i++)
+            {
+                this.spawnQueue.Enqueue(spawnUnit.unitType);
+            }
+        }
 
-        //GameObject enemy = enemies[Random.Range(0, availableTypes.Count)];
-        //Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-        //if (enemy == archer)
-        //{
-        //    nrArchers--;
-        //}
-        //else
-        //{
-        //    nrOgres--;
-        //}
-       // yield return new WaitForSeconds(3);
+        if (this.cr_DoSpawns == null)
+            this.cr_DoSpawns = StartCoroutine(CR_SpawnUnits());
+    }
+
+    private IEnumerator CR_SpawnUnits()
+    {
+        int spawnPointIndex = 0;
+        while (this.spawnQueue.Count > 0)
+        {
+            UnitConfig unitToSpawn = this.spawnQueue.Dequeue();
+            GameObject.Instantiate(unitToSpawn.prefab, this.spawnPoints[spawnPointIndex].position, Quaternion.identity);
+            spawnPointIndex = (spawnPointIndex + 1) % this.spawnPoints.Length;
+
+            yield return new WaitForSeconds(this.spawnInterval);
+        }
     }
 
 }

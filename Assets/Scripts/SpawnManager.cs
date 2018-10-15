@@ -4,42 +4,31 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] AttackConfig currentAttackConfig;
+    public SpawnEnemies[] spawners;
 
-    public AttackConfig attackConfig;
-    public GameObject[] lanes;
-    // Use this for initialization
     void Start()
     {
-        foreach (AttackWave wave in attackConfig.waves)
+        SpawnCurrentConfig();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnCurrentConfig();
+        }
+    }
+
+    void SpawnCurrentConfig()
+    {
+        foreach (AttackWave wave in currentAttackConfig.waves)
         {
             foreach (SpawnUnitGroup unitGroup in wave.unitGroups)
             {
-                switch (unitGroup.lane)
-                {
-                    case Lane.Lanes.LEFT:
-                        print("Spawn enemies in left lane");
-                        var lane = lanes[0];
-                        lanes[0].GetComponent<SpawnEnemies>().Spawn(unitGroup);
-                        break;
-                    case Lane.Lanes.MID:
-                       // print("MID");
-                         break;
-                    case Lane.Lanes.RIGHT:
-                       // print("RIGHT");
-                        break;
-                }
-
-
+                spawners[(int)unitGroup.lane].Spawn(unitGroup);
             }
-            //spawn units at lane
         }
-        }
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
 }

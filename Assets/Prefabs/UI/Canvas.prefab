@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 223200876211028490}
   - component: {fileID: 114177071714465696}
   - component: {fileID: 114961187403895542}
-  - component: {fileID: 114682988077336776}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -123,17 +122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_HealthBar: {fileID: 114225600355161466, guid: 6c8620c37eafc9c4d8914c8ea502555b,
     type: 2}
---- !u!114 &114682988077336776
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1703745203260196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dde57491581e37e408c16433957b1039, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114961187403895542
 MonoBehaviour:
   m_ObjectHideFlags: 1

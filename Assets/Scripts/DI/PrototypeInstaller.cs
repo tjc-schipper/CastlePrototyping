@@ -19,12 +19,8 @@ public class PrototypeInstaller : MonoInstaller<PrototypeInstaller>
     [SerializeField]
     PlayerResources playerResources;
 
-    [Header("UI Prefabs")]
     [SerializeField]
-    BuildDialog prefab_BuildDialog;
-
-    [SerializeField]
-    BuildDialogItem prefab_BuildDialogItem;
+    CameraManager cameraManager;
 
     public override void InstallBindings()
     {
@@ -33,5 +29,7 @@ public class PrototypeInstaller : MonoInstaller<PrototypeInstaller>
         Container.Bind<UIFactory>().FromInstance(this.uiFactory).AsSingle();
         Container.Bind<BuildSystem>().FromInstance(this.buildSystem).AsSingle();
         Container.Bind<PlayerResources>().FromInstance(this.playerResources).AsSingle();
+
+        Container.Bind<CameraManager>().FromInstance(this.cameraManager).AsSingle();
     }
 }

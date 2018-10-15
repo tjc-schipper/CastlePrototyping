@@ -7,23 +7,24 @@ using UnityEngine.AI;
 public class BaseEnemy : MonoBehaviour
 {
 
-	[SerializeField]
-	Transform moveTarget;
-	
-	private Damageable health;
-	private Rigidbody rb;
+    [SerializeField]
+    Transform moveTarget;
+
+    private Damageable health;
+    private Rigidbody rb;
     private LineRenderer lineRenderer;
     public Sprite icon;
-	
-	void Start()
-	{
-        moveTarget = GameObject.FindGameObjectWithTag("Goal").transform;
-		this.rb = GetComponent<Rigidbody>();
-		this.health = GetComponent<Damageable>();
-		this.health.Init();
-		this.health.Destroyed += HandleDestroyed;
 
-		GetComponent<NavMeshAgent>().SetDestination(this.moveTarget.position);
+
+    void Start()
+    {
+        moveTarget = GameObject.FindGameObjectWithTag("Goal").transform;
+        this.rb = GetComponent<Rigidbody>();
+        this.health = GetComponent<Damageable>();
+        this.health.Init();
+        this.health.Destroyed += HandleDestroyed;
+
+        GetComponent<NavMeshAgent>().SetDestination(this.moveTarget.position);
         lineRenderer = GetComponent<LineRenderer>();
 
     }
@@ -38,14 +39,15 @@ public class BaseEnemy : MonoBehaviour
     }
 
     void OnDestroy()
-	{
-		this.health.Destroyed -= HandleDestroyed;
-	}
-	
+    {
+        if (this.health != null)
+            this.health.Destroyed -= HandleDestroyed;
+    }
 
-	private void HandleDestroyed(Damageable d)
-	{
-		Destroy(this.gameObject);
-	}
+
+    private void HandleDestroyed(Damageable d)
+    {
+        Destroy(this.gameObject);
+    }
 
 }

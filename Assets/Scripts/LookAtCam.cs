@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookAtCam : MonoBehaviour {
+public class LookAtCam : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    /// <todo>
+    /// Has to be replaced with Constructor/Factory approach if spawned dynamically.
+    /// </todo>
+    [Zenject.Inject]
+    CameraManager cameraManager;
 
-    // Update is called once per frame
-    public void Update()
+    public void FixedUpdate()
     {
-        Camera camera = Camera.main;
-        transform.LookAt(transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
+        Camera cam = this.cameraManager.MainCam;
+        transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
     }
 }
